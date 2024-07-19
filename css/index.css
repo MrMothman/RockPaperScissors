@@ -5,7 +5,91 @@
     box-sizing: border-box;
 }
 
+.main-area{
+    display: flex;
+    flex-flow: column wrap;
+}
 
+.score-area{
+    flex: auto;
+    display: flex;
+    flex-flow: row wrap;
+    background-color: blue;
+    justify-content: center;
+    gap: 10rem;
+    align-items: center;
+    min-height: 200px;
+    min-width: 100%;
+}
+
+.score-box-container{
+    border: 5px solid black;
+    min-height: 150px;
+    min-width: 200px;
+}
+
+.title-box{
+    padding: 10px;
+    line-height: 20px;    
+    text-align: center;
+    font-size: 40px;
+    border-bottom: 5px solid black;
+}
+
+.round-box{
+    padding: 40px;
+    line-height: 20px;    
+    text-align: center;
+    font-size: 40px;
+    border: 5px solid black;
+
+}
+
+.score-box{
+    padding-top: 5px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.play-area{
+    flex: auto;
+    display: flex;
+    background-color: purple;
+    align-items: center;
+    justify-content: center;
+    gap: 25rem;
+    min-height: 350px;
+    min-width: 100%;
+}
+
+
+.image-choice{
+    flex: 0 1 auto;
+    border: 5px solid black;
+    height: 300px;
+    width: 300px;
+}
+
+.button-area{
+    flex:auto;
+    flex-flow: row wrap;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 25rem;
+    background-color: yellow;
+    min-height: 200px;
+    min-width: 100%;
+}
+
+.play-button{
+    flex: 0 1 auto;
+    font-size: 40px;
+    min-width: 200px;
+    min-height: 150px;
+    border-radius: 10%;
+
+}
 
 
 
