@@ -1,19 +1,28 @@
 let play = true;
-let computer = 0;
-let player = 0;
+let computerScore = 0;
+let playerScore = 0;
+let round = 0;
+
+
+let playerScoreElem = document.querySelector("#player-score");
+let computerScoreElem = document.querySelector("#computer-score");
+let roundElem = document.querySelector("#round-box");
+
+let playerChoiceImageElem = document.querySelector("#player-image-choice");
+let computerChoiceImageElem = document.querySelector("#computer-image-choice");
+
+let buttonListElem = document.querySelectorAll(".play-button");
+
+
 
 
 function random_computer_input(){
     let rpsArray = ["Rock", "Paper", "Scissors"];
-
-    return rpsArray[Math.floor(Math.random() * rpsArray.length)];
-}
-
-function player_choice(){
-
-    let choice = prompt("Pick Rock, Paper, or Scissors");
+    let choice = rpsArray[Math.floor(Math.random() * rpsArray.length)];
+    computerChoiceImageElem.src = `assets/${choice}.jpg`;
     return choice;
 }
+
 
 function validate_choice(choice){
     let valid = false;
@@ -39,13 +48,14 @@ function validate_choice(choice){
 function adjust_score(winner){
     switch(winner){
         case 'player':
-            player++;
+            playerScore++;
             break;
         case 'computer':
-            computer++;
+            computerScore++;
             break;
     }
 }
+
 
 function compare_types(winner, loser, choice){
     if(choice === winner){
@@ -55,9 +65,12 @@ function compare_types(winner, loser, choice){
     }
 }
 
+
 function display_score(){
-    console.log(`Player: ${player} | Computer: ${computer}`);
+    playerScoreElem.textContent = playerScore; 
+    computerScoreElem.textContent = computerScore;
 }
+
 
 function winner_declaration(winner, choice){
     console.log(`${winner} won with ${choice}`);
@@ -66,17 +79,9 @@ function winner_declaration(winner, choice){
 
 
 function game_logic(playerChoice, computerChoice){
-   
-    let playerChoiceLower = playerChoice;
-    
-    if(!validate_choice(playerChoiceLower)){
-        console.log(`You picked ${playerChoice} please pick a Valid choice!`);
-        return;
-    }
 
-    switch(playerChoiceLower){
+    switch(playerChoice){
         case 'rock':
-
             if(compare_types('Paper','Scissors',computerChoice)){
                 adjust_score('computer');
                 winner_declaration('computer',computerChoice);
@@ -113,47 +118,29 @@ function game_logic(playerChoice, computerChoice){
             break;
 
     }
-
     display_score();
-
-}
-
-function continue_playing(){
-    let answer = prompt(`Would you like to keep playing?`);
-    switch(answer.toLowerCase()){
-        case 'yes':
-            play = true;
-            break;
-        case 'y':
-            play = true;
-            break;
-        case 'no':
-            play = false;
-            break;
-        case 'n':
-            play = false;
-            break;
-        default:
-            console.log(`you picked ${answer} since that is not yes or no lets play again`);
-    }
-
 }
 
 
-while(play){
-    let playerChoice = player_choice();
+function buttonEventAssign(playerChoice){
+    
+    roundElem.textContent = ++round.toString();
     let computerChoice = random_computer_input();
     game_logic(playerChoice, computerChoice);
-    continue_playing();
-
 }
 
 
+buttonListElem.forEach((button) =>{
+    
+    let playerChoice = button.getAttribute("id").split("-");
 
-
-
-
-
+    button.addEventListener("click", () => {
+        playerChoiceImageElem.src = `assets/${playerChoice[0]}.jpg`;        
+        roundElem.textContent = ++round;
+        let computerChoice = random_computer_input();
+        game_logic(playerChoice[0], computerChoice);
+    });
+});
 
 
 
